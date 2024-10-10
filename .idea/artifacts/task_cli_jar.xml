@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="task-cli:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/task_cli_jar</output-path>
+    <root id="archive" name="task-cli.jar">
+      <element id="module-output" name="task-cli" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.0/junit-4.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/info/picocli/picocli/4.7.6/picocli-4.7.6.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

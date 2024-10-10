@@ -1,0 +1,18 @@
+{
+	"tasks": [
+	{
+		"id":1,
+		"description":"Make dinner",
+		"status":"todo",
+		"createdAt":"10/10/2024 06:24 PM",
+		"updatedAt":"10/10/2024 06:24 PM"
+	},
+	{
+		"id":2,
+		"description":"Go shopping",
+		"status":"todo",
+		"createdAt":"10/10/2024 06:24 PM",
+		"updatedAt":"null"
+	}
+	]
+}

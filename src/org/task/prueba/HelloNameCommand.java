@@ -1,7 +1,9 @@
 package org.task.prueba;
 
 import picocli.CommandLine;
+import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
 @Command(
         name = "helloName",
@@ -9,10 +11,10 @@ import picocli.CommandLine.Command;
 )
 class HelloNameCommand implements Runnable {
     // Prueba de la librería Picocli
-    @CommandLine.Parameters(index = "0", description = "the name to print")
+    @Parameters(index = "0", description = "the name to print")
     private String name;
 
-    @CommandLine.Option(names = {"-c", "--caps"}, description = "Print name in all caps")
+    @Option(names = {"-c", "--caps"}, description = "Print name in all caps")
     private boolean allCaps = false;
 
     public static void main(String[] args){

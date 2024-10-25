@@ -1,18 +1,39 @@
 {
-	"tasks": [
+	"task": [
 	{
 		"id":1,
 		"description":"Make dinner",
 		"status":"todo",
-		"createdAt":"10/10/2024 06:24 PM",
-		"updatedAt":"10/10/2024 06:24 PM"
+		"createdAt":"17/10/2024 06:01 PM",
+		"updatedAt":"17/10/2024 06:01 PM"
 	},
 	{
 		"id":2,
 		"description":"Go shopping",
 		"status":"todo",
-		"createdAt":"10/10/2024 06:24 PM",
-		"updatedAt":"null"
+		"createdAt":"17/10/2024 06:01 PM",
+		"updatedAt":"17/10/2024 06:01 PM"
+	},
+	{
+		"id":3,
+		"description":"Visit grandma",
+		"status":"done",
+		"createdAt":"17/10/2024 06:02 PM",
+		"updatedAt":"17/10/2024 06:02 PM"
+	},
+	{
+		"id":4,
+		"description":"Run in the morning",
+		"status":"in_progress",
+		"createdAt":"17/10/2024 06:02 PM",
+		"updatedAt":"17/10/2024 06:02 PM"
+	},
+	{
+		"id":5,
+		"description":"Spanish class",
+		"status":"in_progress",
+		"createdAt":"17/10/2024 06:02 PM",
+		"updatedAt":"17/10/2024 06:02 PM"
 	}
 	]
 }

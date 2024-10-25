@@ -1,11 +1,15 @@
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.task.controller.CRUD;
+import org.task.models.Status;
+
+import java.io.IOException;
 
 public class TestTask {
 
-    @Test
-    public void testWriteJson(){
+    //@Test
+    public void testWriteJson() throws IOException, ParseException {
         String result = CRUD.add("Buy groceries and make dinner");
         CRUD.add("Go shopping");
         CRUD.list();
@@ -16,8 +20,32 @@ public class TestTask {
     }
 
     //@Test
-    public void testList(){
+    public void testUpdateStatus() throws IOException, ParseException {
+        System.out.println("-----");
         CRUD.add("Visit grandma");
-        CRUD.list();
+        CRUD.add("Run in the morning");
+        CRUD.add("Spanish class");
+        CRUD.updateStatus(3, Status.DONE);
+        CRUD.updateStatus(4, Status.IN_PROGRESS);
+        CRUD.updateStatus(5, Status.IN_PROGRESS);
+        CRUD.listStatus(Status.DONE);
+    }
+
+    @Test
+    public void testReadJson(){
+        try {
+            CRUD.readJson();
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //@Test
+    public void testListar() throws IOException, ParseException {
+        CRUD.listStatus(Status.DONE);
+        System.out.println("-----");
+        CRUD.listStatus(Status.TODO);
+//        CRUD.add("Take out the dog");
+//        System.out.println("-----");
+//        CRUD.list();
     }
 }

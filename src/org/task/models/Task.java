@@ -1,6 +1,7 @@
 package org.task.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,17 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.createdAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
         this.status = Status.TODO;
         this.ID = ++count + ID;
+        taskList = new ArrayList<>();
+    }
+    public Task(String description, Status status, String createdAt, String updatedAt) {
+        this.description = description;
+        this.createdAt = LocalDateTime.parse(createdAt, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        this.updateAt = LocalDateTime.parse(updatedAt, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        this.status = status;
+        this.ID =  ++count + ID;
         taskList = new ArrayList<>();
     }
 
@@ -43,10 +53,6 @@ public class Task {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdateAt() {

@@ -1,7 +1,10 @@
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.task.TaskCli;
 import org.task.controller.CRUD;
+import org.task.controller.JsonHandler;
+import org.task.exceptions.TaskNotFoundException;
 import org.task.models.Status;
 
 import java.io.IOException;
@@ -9,7 +12,7 @@ import java.io.IOException;
 public class TestTask {
 
     //@Test
-    public void testWriteJson() throws IOException, ParseException {
+    public void testWriteJson() throws IOException, ParseException, TaskNotFoundException {
         String result = CRUD.add("Buy groceries and make dinner");
         CRUD.add("Go shopping");
         CRUD.list();
@@ -20,7 +23,7 @@ public class TestTask {
     }
 
     //@Test
-    public void testUpdateStatus() throws IOException, ParseException {
+    public void testUpdateStatus() throws IOException, ParseException, TaskNotFoundException {
         System.out.println("-----");
         CRUD.add("Visit grandma");
         CRUD.add("Run in the morning");
@@ -32,12 +35,12 @@ public class TestTask {
     }
 
     @Test
-    public void testReadJson(){
-        try {
-            CRUD.readJson();
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testMain() throws TaskNotFoundException {
+        TaskCli.main(new String[]{"--list"});
+        System.out.println("-------------");
+        System.out.println("-------------");
+        TaskCli.main(new String[]{"-h"});
+//        TaskCli.main(new String[]{"mark-in-progress","0"});
     }
     //@Test
     public void testListar() throws IOException, ParseException {

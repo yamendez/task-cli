@@ -1,0 +1,18 @@
+{
+	"tasks": [
+	{
+		"id":1,
+		"description":"saludar al vecino",
+		"status":"todo",
+		"createdAt":"18/11/2024 06:02 PM",
+		"updatedAt":"18/11/2024 06:02 PM"
+	},
+	{
+		"id":2,
+		"description":"pasear al perro",
+		"status":"todo",
+		"createdAt":"18/11/2024 06:16 PM",
+		"updatedAt":"18/11/2024 06:16 PM"
+	}
+	]
+}

@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class JsonHandler {
 
     //public static final File file = new File(System.getProperty("user.dir"), "tasks.json");//
-    public static final File file = new File(System.getProperty("user.dir"), "task.json");//
+    public static final File file = new File(System.getProperty("user.dir"), "tasks.json");//
     private static final List<Task> list = new ArrayList<>();
 
     public static List<Task> getList() {
@@ -42,7 +42,7 @@ public class JsonHandler {
             String p = prueba.replaceAll("[{\\[\\]]", "");
             p = p.replaceAll("( {2,}|\\t)", "");
 
-            System.out.println(p);
+            //System.out.println(p);
             return p.split("}");
         } catch (IOException e){
             throw new ReadJsonException("Error while reading the json file.");
@@ -64,7 +64,7 @@ public class JsonHandler {
             String[] a = arr.split(",");
             //
             for (int i = 0; i < a.length; i++) {
-                a[i] = a[i].replaceFirst(" ", "");
+                a[i] = a[i].charAt(0) == ' '? a[i].replaceFirst(" ", ""): a[i];
             }
             list.add(new Task(a[1], Status.valueOf(a[2].toUpperCase()), a[3], a[4]));
         });

@@ -30,8 +30,18 @@ public class CRUD {
         if(file.exists() && getList().isEmpty()) {
             readJson();
         }
-        getList().forEach(task -> System.out.println(task.getID()+ " " + task.getDescription() + " - "
-                + task.getStatus().name().toLowerCase()));
+        if(getList().isEmpty()){
+            System.out.println("There are no saved tasks.");
+        } else {
+            System.out.println("------ All Tasks ------ ");
+            getList().forEach(task -> {
+                String s = task.getStatus().name().toLowerCase();
+                if (s.equals("in_progress")) {
+                    s = "in-progress";
+                }
+                System.out.println(task.getID() + " " + task.getDescription() + " - " + s);
+            });
+        }
     }
 
     /**
@@ -41,10 +51,20 @@ public class CRUD {
         if(file.exists() && getList().isEmpty()) {
             readJson();
         }
-        System.out.println("------ Tasks "+status.toString().toLowerCase()+" ------");
-        getList().stream().filter(t -> t.getStatus() == status)
-                .forEach(task -> System.out.println(task.getID()+ " " + task.getDescription() + " - "
-                + task.getStatus().name().toLowerCase()));
+        if(getList().isEmpty()) {
+            System.out.println("There are no saved tasks.");
+        } else {
+            String stat = status.name().equalsIgnoreCase("in_progress")? "in-progress": status.name().toLowerCase();
+            System.out.println("------ Tasks "+stat+" ------");
+            getList().stream().filter(t -> t.getStatus() == status)
+                    .forEach(task -> {
+                        String s = task.getStatus().name().toLowerCase();
+                        if (s.equals("in_progress")) {
+                            s = "in-progress";
+                        }
+                        System.out.println(task.getID() + " " + task.getDescription() + " - " + s);
+                    });
+        }
     }
 
     /**
@@ -60,7 +80,7 @@ public class CRUD {
             oldTask.setDescription(newTask);
             oldTask.setUpdateAt(LocalDateTime.now());
             getList().set(id - 1, oldTask);
-            //writeJson(getList());
+            writeJson(getList());
             System.out.println(ConsoleColors.ANSI_GREEN+"Task " + id + " was updated"+ConsoleColors.ANSI_RESET);
         }
     }
@@ -78,7 +98,7 @@ public class CRUD {
             oldTask.setStatus(status);
             oldTask.setUpdateAt(LocalDateTime.now());
             getList().set(id - 1, oldTask);
-            //writeJson(getList());
+            writeJson(getList());
             System.out.println(ConsoleColors.ANSI_GREEN+"Task " + id + " is " + oldTask.getStatus().toString().toLowerCase()+ConsoleColors.ANSI_RESET);
         }
 
@@ -117,14 +137,14 @@ public class CRUD {
     public static String help(){
         return """
                 Commands:\s
-                \t add <description>
-                \t update <id> <new desc>
-                \t mark-in-progress <id>
-                \t mark-done <id>
-                \t list
-                \t list [done|todo|in_progress]
-                \t delete <id>
-                \t help""";
+                \t add <task-name> \tAdds a new task to the json file.
+                \t update <id> <task-name> \tRename the task given an id.
+                \t mark-in-progress <task-id> \tMark a task in progress.
+                \t mark-done <task-id> \tMark a task as done.
+                \t list \tList all tasks
+                \t list [done|todo|in-progress] \tList tasks filter by status
+                \t delete <id> \tDelete a task
+                \t help, -h \tPrints this help message""";
     }
 
 }

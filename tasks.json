@@ -2,10 +2,10 @@
 	"tasks": [
 	{
 		"id":1,
-		"description":"prueba 1",
-		"status":"todo",
+		"description":"prueba 3",
+		"status":"done",
 		"createdAt":"30/10/2025 02:13 PM",
-		"updatedAt":"30/10/2025 02:13 PM"
+		"updatedAt":"30/10/2025 03:59 PM"
 	}
 	]
 }

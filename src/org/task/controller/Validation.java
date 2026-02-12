@@ -9,14 +9,15 @@ public class Validation {
         put("add",1);
         put("update",2);
         put("list", 1);
-        put("mark", 1);
+        put("mark-in-progress", 1);
+        put("mark-done", 1);
         put("delete",1);
     }};
     private static final List<String> commands = Arrays.asList("help","-h","list","add","update",
             "delete","mark-in-progress","mark-done");
 
-    public static boolean hasCommands(String[] args){
-        return commands.contains(args[0]);
+    public static boolean validCommand(String command){
+        return commands.contains(command);
     }
     public static boolean hasParameters(String[] args){
         boolean hasParam = false;
@@ -32,12 +33,16 @@ public class Validation {
         return hasParam;
     }
 
-    public static boolean validTypes(String[] args){
-        boolean validTypes = false;
-
-        return validTypes;
+    public static void invalidType(String param){
+        System.out.println(param + " is not a valid ID.");
+        errorMessage();
     }
-
+    private static void validParams(boolean args) {
+        if (args) {
+            Validation.errorMessage();
+            System.exit(1);
+        }
+    }
     public static void errorMessage() {
         System.out.println("Type -h, help to see the valid commands and parameters.");
     }

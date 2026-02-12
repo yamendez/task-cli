@@ -126,7 +126,6 @@ public class CRUD {
     private static boolean isIdValid(int id) {
         //boolean isValid = true;
         if(id-1 > getList().size() || id-1 < 0){
-            //isValid = false;
             System.out.println(ConsoleColors.RED + "Could not found the task (ID: "+id+")." + ConsoleColors.ANSI_RESET);
             return false;
         }

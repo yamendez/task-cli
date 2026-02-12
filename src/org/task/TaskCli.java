@@ -5,88 +5,72 @@ import org.task.controller.Validation;
 import org.task.models.Status;
 
 
-public class TaskCli{
+public class TaskCli {
     public static void main(String[] args) {
 
-        if(args.length == 0) {
+        validParams(args.length == 0);
+        if (!Validation.validCommand(args[0])) {
+            System.out.println(args[0] + " is not a valid command.");
             Validation.errorMessage();
             System.exit(1);
         }
-        if(!Validation.hasCommands(args)) {
-            System.out.println(args[0]+" is not a valid command.");
-            Validation.errorMessage();
-            System.exit(1);
-        }
-        //if(commands.contains(args[0])){
-            switch(args[0]){
-                case "add" -> {
-                    if(!Validation.hasParameters(args)) {
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    System.out.println(CRUD.add(args[1]));
-                }
-                case "update" -> {
-                    if(!Validation.hasParameters(args)) {
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    CRUD.updateTask(Integer.parseInt(args[1]), args[2]);
-                }
-                case "list" -> {
-                    if (!Validation.hasParameters(args)){
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    if(args.length == 2){
-                        String status = args[1].equals("in-progress")? "in_progress": args[1];
-                        CRUD.listStatus(Status.valueOf(status.toUpperCase()));
-                    } else {
-                        CRUD.list();
-                    }
-                    /*if(args.length == 1){
-                        CRUD.list();
-                    } else {
-                        try {
-                            Status status = null;
-                            switch (args[1]) {
-                                case "todo" -> status = Status.TODO;
-                                case "done" -> status = Status.DONE;
-                                case "in-progress" -> status = Status.IN_PROGRESS;
-                            }
-                            
-                            CRUD.listStatus(status);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(args[1] + " is not a valid status.");
-                        }
-                    }*/
-                }
-                case "mark-in-progress" -> {
-                    if (!Validation.hasParameters(args)) {
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    CRUD.updateStatus(Integer.parseInt(args[1]), Status.IN_PROGRESS);
-                }
-                case "mark-done" -> {
-                    if (!Validation.hasParameters(args)) {
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    CRUD.updateStatus(Integer.parseInt(args[1]), Status.DONE);
-                }
-                case "delete" -> {
-                    if (!Validation.hasParameters(args)) {
-                        Validation.errorMessage();
-                        System.exit(1);
-                    }
-                    System.out.println(CRUD.delete(Integer.parseInt(args[1])));
-                }
-                case "help","-h" -> System.out.println(CRUD.help());
+        switch (args[0]) {
+            case "add" -> {
+                validParams(!Validation.hasParameters(args));
+                System.out.println(CRUD.add(args[1]));
             }
+            case "update" -> {
+                validParams(!Validation.hasParameters(args));
+                try {
+                    CRUD.updateTask(Integer.parseInt(args[1]), args[2]);
 
-//        }else{
-//            System.out.println(args[0]+" is not a valid command. For more information type help");
-//        }
+                } catch (NumberFormatException e) {
+                    Validation.invalidType(args[1]);
+                }
+            }
+            case "list" -> {
+                validParams(!Validation.hasParameters(args));
+                if (args.length == 2) {
+                    String status = args[1].equals("in-progress") ? "in_progress" : args[1];
+                    CRUD.listStatus(Status.valueOf(status.toUpperCase()));
+                } else {
+                    CRUD.list();
+                }
+            }
+            case "mark-in-progress" -> {
+                validParams(!Validation.hasParameters(args));
+                try {
+                    CRUD.updateStatus(Integer.parseInt(args[1]), Status.IN_PROGRESS);
+
+                } catch (NumberFormatException e) {
+                    Validation.invalidType(args[1]);
+                }
+            }
+            case "mark-done" -> {
+                validParams(!Validation.hasParameters(args));
+                try {
+                    CRUD.updateStatus(Integer.parseInt(args[1]), Status.DONE);
+                } catch (NumberFormatException e) {
+                    Validation.invalidType(args[1]);
+                }
+            }
+            case "delete" -> {
+                validParams(!Validation.hasParameters(args));
+                try {
+                    System.out.println(CRUD.delete(Integer.parseInt(args[1])));
+                } catch (NumberFormatException e) {
+                    Validation.invalidType(args[1]);
+                }
+            }
+            case "help", "-h" -> System.out.println(CRUD.help());
+        }
+
+    }
+
+    private static void validParams(boolean params) {
+        if (params) {
+            Validation.errorMessage();
+            System.exit(1);
+        }
     }
 }
